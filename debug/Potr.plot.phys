@@ -1,0 +1,64 @@
+#!/bin/bash
+
+DIRPATH="./"
+CONFSIZE=2
+IT=9
+BASE=RC16x32_B1830Kud013760Ks013710C1761
+
+PLOTPATH="\"${DIRPATH}/OmgOmgPot$(printf %06d $CONFSIZE).${BASE}.it$(printf %02d $IT)\" using (\$1):(\$2*197.3/0.1209):(\$3*197.3/0.1209) w e ti \"spin0 it$IT\""
+
+for IT in 8 7 
+do
+PLOTPATH="$PLOTPATH ,  \"${DIRPATH}/OmgOmgPot$(printf %06d $CONFSIZE).${BASE}.it$(printf %02d $IT)\" using (\$1):(\$2*197.3/0.1209):(\$3*197.3/0.1209) w e ti \"spin0 it$IT\" "
+done
+
+gnuplot -persist <<EOF
+reset
+set term postscript enhanced color
+set output "Potentialr.$CONFSIZE.eps"
+set multiplot
+set title "Omega-Omega Potential"
+set yr[-200:800]
+set grid
+set xl "r           a=0.1209[fm]"
+set yl "[Mev]"	
+set key left top
+plot $PLOTPATH
+
+unset grid
+unset title
+set size 0.5,0.5
+set origin 0.50,0.40
+unset key
+set yr[-150:20]
+unset xl
+unset yl
+replot
+plot 0  ls 1 lc  rgb "black" lw
+unset multiplot
+reset
+set output
+set term x11
+set multiplot
+set title "Omega-Omega Potential"
+set yr[-200:800]
+set grid
+set xl "r           a=0.1209[fm]"
+set yl "[Mev]"	
+set key left top
+plot $PLOTPATH
+
+unset grid
+unset title
+set size 0.5,0.5
+set origin 0.50,0.40
+unset key
+set yr[-150:20]
+unset xl
+unset yl
+replot
+plot 0  ls 1 lc  rgb "black" lw
+reset
+EOF
+
+

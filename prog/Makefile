@@ -1,0 +1,13 @@
+CXX = g++
+
+SRC_DIR = .
+INC_DIR = ../include
+
+INC_1 = $(INC_DIR)/gnuplot.h
+INC_LST= $(INC_1)
+
+SRC_LST=$(wildcard $(addsuffix /*.cpp,$(SRC_DIR)))
+
+
+all: $(INC_LST) $(SRC_LST)
+	$(CXX) -o $@ $(SRC_LST)
