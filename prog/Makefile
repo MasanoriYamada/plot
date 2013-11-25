@@ -10,7 +10,10 @@ SRC_LST=$(wildcard $(addsuffix /*.cpp,$(SRC_DIR)))
 
 
 all: plot.out
+debug:debug.out
 plot.out:$(INC_LST) $(SRC_LST)
 	$(CXX) -o $@ $(SRC_LST)
+debug.out:$(INC_LST) $(SRC_LST)
+	$(CXX) -g -o $@ $(SRC_LST)
 clean:
-	rm ./*.o ./*.out
+	rm ./*.o ./*.out ./*tmpForDrowing.dat
