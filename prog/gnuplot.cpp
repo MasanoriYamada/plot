@@ -7,17 +7,17 @@ using namespace std;
 
 void GNUPLOT::plot(DATA data)
 {
-
   string  plot_string;
   for(int i = 0 ; i < data.get_datasize() ; i ++)
     {
       if (!flg_w_){
-      plot_string = "\"" +  (data.getfName())[i] + "\"" + plot_string;
+	plot_string = "\"" +  (data.getfName())[i] + "\"" + plot_string ;
+
       }
       else {
 	plot_string = "\"" +  (data.getfName())[i] + "\" w e " + plot_string;
       }
-      if ( i != data.get_datasize() - 1) plot_string = " , " + plot_string;
+      if ( i != data.get_datasize() - 1) plot_string = " , " + plot_string ;
     }
       cout<<plot_string<<endl;
 
@@ -30,6 +30,11 @@ void GNUPLOT::plot(DATA data)
   fprintf(gp_, "plot %s\n", plot_string.c_str());
 
 }
-void GNUPLOT:: set_flg_w(bool flg_w){
-  flg_w_ =flg_w;
+void GNUPLOT::set_flg_w(bool flg_w)
+{
+  flg_w_ = flg_w;
+}
+void GNUPLOT::set(string param)
+{
+ fprintf(gp_, "%s\n", param.c_str());
 }

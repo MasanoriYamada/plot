@@ -9,5 +9,8 @@ INC_LST= $(INC_1)
 SRC_LST=$(wildcard $(addsuffix /*.cpp,$(SRC_DIR)))
 
 
-all: $(INC_LST) $(SRC_LST)
+all: plot.out
+plot.out:$(INC_LST) $(SRC_LST)
 	$(CXX) -o $@ $(SRC_LST)
+clean:
+	rm ./*.o ./*.out

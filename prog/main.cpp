@@ -13,7 +13,9 @@ int main(){
 
   GNUPLOT gp;
   gp.set_flg_w(true);
+  gp.set("set title \"hogehoge\"");
   gp.plot(data);
+  
 
   return 0;
 }
