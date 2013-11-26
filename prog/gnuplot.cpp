@@ -5,7 +5,7 @@
 //using namespace namespace_gnuplot;
 using namespace std;
 
-void GNUPLOT::plot(DATA data)
+void GNUPLOT::plot(DATA &data)
 {
   fprintf(gp_, "set title \" %s \"\n", data.getName().c_str());
 

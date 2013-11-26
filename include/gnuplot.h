@@ -16,7 +16,7 @@
       pclose(gp_);
     }
 
-    void plot(DATA data);
+    void plot(DATA &data);
     void set(std::string param);
     void set_flg_w(bool flg_w_);
     void set_flg_rm(bool flg_rm_);
