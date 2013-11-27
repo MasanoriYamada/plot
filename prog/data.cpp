@@ -14,6 +14,12 @@ DATA::DATA(const DATA &other)
   dataName_ = other.dataName_;
   fName_ = new std::string[datasize_]();
   copy(other.fName_, other.fName_ + sizeof(string)*datasize_, fName_);
+  x_scale_ = new std::string[datasize_]();
+  copy(other.x_scale_, other.x_scale_ + sizeof(string)*datasize_, x_scale_);
+  y_scale_ = new std::string[datasize_]();
+  copy(other.y_scale_, other.y_scale_ + sizeof(string)*datasize_, y_scale_);
+  err_scale_ = new std::string[datasize_]();
+  copy(other.err_scale_, other.err_scale_ + sizeof(string)*datasize_, err_scale_);
 }
 
 void DATA::in_file(string* fname)
@@ -70,17 +76,37 @@ void DATA::add(DATA &data1, DATA &data2)
   for (int id = 0 ; id < data1.datasize_ ; id ++)
     {
       fName_[id] = (data1.getfName())[id];
+      x_scale_[id] = (data1.get_x_scale())[id];
+      y_scale_[id] = (data1.get_y_scale())[id];
+      err_scale_[id] = (data1.get_err_scale())[id];
     }
   for (int id = data1.datasize_ ; id < datasize_ ; id ++)
     {
       fName_[id] = (data2.getfName())[id - data1.datasize_];
-    }
-
-  for (int i =0; i<datasize_ ;i++){
+      x_scale_[id] = (data2.get_x_scale())[id - data1.datasize_];
+      y_scale_[id] = (data2.get_y_scale())[id - data1.datasize_];
+      err_scale_[id] = (data2.get_err_scale())[id - data1.datasize_];
     }
 
 }
-
+void DATA::set_scale(int x_scale, int y_scale, int err_scale)
+{
+  stringstream sx, sy, se;
+  sx<< x_scale;
+  sy<< y_scale;
+  se<< err_scale;
+  for(int id = 0; id < datasize_ ; id ++){
+    x_scale_[id]   = sx.str();
+    y_scale_[id]   = sy.str();
+    err_scale_[id] = se.str();
+}
+  sx.str("");
+  sx.clear(stringstream::goodbit);
+  sy.str("");
+  sy.clear(stringstream::goodbit);
+  se.str("");
+  se.clear(stringstream::goodbit);
+}
 string DATA::getName()
 {
   return dataName_;
@@ -92,4 +118,16 @@ string* DATA::getfName()
 int DATA::get_datasize()
 {
    return datasize_;
+}
+string* DATA::get_x_scale()
+{
+  return x_scale_;
+}
+string* DATA::get_y_scale()
+{
+  return y_scale_;
+}
+string* DATA::get_err_scale()
+{
+  return err_scale_;
 }

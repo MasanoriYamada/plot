@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdio.h>
+#include <sstream>
 #include "../include/gnuplot.h"
 
 //using namespace namespace_gnuplot;
@@ -13,11 +14,14 @@ void GNUPLOT::plot(DATA &data)
   for(int i = 0 ; i < data.get_datasize() ; i ++)
     {
       if (!flg_w_){
-	plot_string = "\"" +  (data.getfName())[i] + "\"" + plot_string ;
-
+	plot_string = "\"" +  (data.getfName())[i] + 
+	  "\" using ($1*" + (data.get_x_scale())[i] + "):($2*" + (data.get_y_scale())[i] + ")" 
+	  + plot_string ;
       }
       else {
-	plot_string = "\"" +  (data.getfName())[i] + "\" w e " + plot_string;
+	plot_string = "\"" +  (data.getfName())[i] + 
+	  "\" using ($1*" + data.get_x_scale()[i] + "):($2*" + data.get_y_scale()[i] + "):($3*"+ data.get_err_scale()[i] + ") w e " 
+	  + plot_string;
       }
       if ( i != data.get_datasize() - 1) plot_string = " , " + plot_string ;
     }

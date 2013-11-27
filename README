@@ -18,7 +18,9 @@ void in_exp(double** a,double (*func)(double x, double* a), double x_in, double 
 パラメタa ,関数ポインタ x_inからx_fiの範囲にdx間隔でデータを生成。
 ・GNUPLOTクラスの plot(DATA &data);を利用するとプロットできる
 
+option
 ・set_flg_w(bool)でエラーを付けるか選べる
 ・set("文字列")でgnuplotにset gridなどの設定を渡せる。
+・DATAのメンバ関数 set_scale(x_scale, y_scale, err_scale) を使うとスケール倍できる (引数は全てint　デフォルトは1)
 ・DATAクラスのメソッドdata3.add(DATA data1, DATA data2)を使うと data1とdata2を合体したdata3をつくることができる
 (この場合 DATA data3("",data1.get_datasize() + data2.get_datasize())として作らないといけないので注意 data3のデータサイズはdata1と2が入る大きさじゃないといけないから)

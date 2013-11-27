@@ -23,6 +23,7 @@ int main(){
   
   DATA data_file("file",Nfile);
   data_file.in_file(input);
+  data_file.set_scale(2,2,2);
   gp1.set_flg_w(true);
   gp1.plot(data_file);
   
@@ -41,7 +42,7 @@ int main(){
   GNUPLOT gp3;
   DATA data3("",data_file.get_datasize() + data_exp.get_datasize());
   data3.add(data_file , data_exp);
-  gp3.set_flg_w(true);
+  gp3.set_flg_w(false);
   gp3.plot(data3);
 
   delete []a;
