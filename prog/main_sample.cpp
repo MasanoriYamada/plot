@@ -27,24 +27,23 @@ int main(){
   gp1.plot(data_file);
   
   DATA data_exp("exp",Nfile);
-  double b[Npara] ={1,0.3};
+  double b[Npara] ={0.01,0.01};
   double **a = new double* [Nfile];
   
   for (int i =0 ;i<Nfile;i++){ 
     a[i]=b; 
   }
   
-  data_exp.in_exp(a,gauss, 0, 1, 0.001);
+  data_exp.in_exp(a,gauss, 0, 20, 0.01);
   gp2.set_flg_rm(true);
   gp2.plot(data_exp);
-  /*
-  GNUPLOT gp3;
-  DATA data3("",6);
-  cout<<"hoge"<<endl;
-  data3 = data_file.add(data_file , data_exp);
 
+  GNUPLOT gp3;
+  DATA data3("",data_file.get_datasize() + data_exp.get_datasize());
+  data3.add(data_file , data_exp);
+  gp3.set_flg_w(true);
   gp3.plot(data3);
-  */  
+
   delete []a;
 
   return 0;

@@ -1,0 +1,24 @@
+多数のファイルからデータをプロットするためのプログラム。
+
+できること。
+１，データファイルを読み込みプロットする
+２，関数をつくり、fitパラメータからプロットする
+３，１,２を同時にプロットする
+
+流れ
+DATAクラスでデータを管理し それをGNUPLOクラスから利用しプロットする
+
+How to use
+・GNUPLOTクラスとDATAクラスのインスタンスを生成  ただしDATAのコンストラクタは、DATA("データ名",データ数)
+・GNUPLOTで利用するためのDATAクラスにデータを入力する 2パターン
+１．ファイル名から入力
+in_file(string * array)   arrayにファイル名がはいった配列を渡せばいい
+２，関数とパラメータから入力
+void in_exp(double** a,double (*func)(double x, double* a), double x_in, double x_fi, double dx);を利用する
+パラメタa ,関数ポインタ x_inからx_fiの範囲にdx間隔でデータを生成。
+・GNUPLOTクラスの plot(DATA &data);を利用するとプロットできる
+
+・set_flg_w(bool)でエラーを付けるか選べる
+・set("文字列")でgnuplotにset gridなどの設定を渡せる。
+・DATAクラスのメソッドdata3.add(DATA data1, DATA data2)を使うと data1とdata2を合体したdata3をつくることができる
+(この場合 DATA data3("",data1.get_datasize() + data2.get_datasize())として作らないといけないので注意 data3のデータサイズはdata1と2が入る大きさじゃないといけないから)

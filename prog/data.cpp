@@ -2,10 +2,19 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 #include "../include/data.h"
 
 //using namespace namespace_gnuplot;
 using namespace std;
+
+DATA::DATA(const DATA &other)
+{
+  datasize_ = other.datasize_;
+  dataName_ = other.dataName_;
+  fName_ = new std::string[datasize_]();
+  copy(other.fName_, other.fName_ + sizeof(string)*datasize_, fName_);
+}
 
 void DATA::in_file(string* fname)
 {
@@ -45,36 +54,31 @@ void DATA::makefile(int ND, int ifile)
     std::cerr << "ERROR output file can't open (no exist)::"<<fName_[ifile]<<std::endl;
     exit(1);
    }
+  int error = 0;
   for(int id = 0 ; id < ND; id++){
-    ofs<<x_data_[id]<<" "<<y_data_[id]<<endl;
+    ofs<<x_data_[id]<<" "<<y_data_[id]<<" "<<error<<endl;
   }
   ofs.close();
 
 }
 
-DATA DATA::add(DATA &data1, DATA &data2)
+void DATA::add(DATA &data1, DATA &data2)
 {
-  DATA data3(data1.getName() + "+" + data2.getName() ,data1.datasize_ + data2.datasize_);
-  string* array = new string[data3.datasize_];
+  this->dataName_ = data1.getName() + " + " + data2.getName();
+  this->datasize_ = data1.datasize_ + data2.datasize_;
 
   for (int id = 0 ; id < data1.datasize_ ; id ++)
     {
-      array[id] = (data1.getfName())[id];
-      cout<<"data1"<<(data1.getfName())[id]<<endl;
+      fName_[id] = (data1.getfName())[id];
     }
-  for (int id = data1.datasize_ ; id < data3.datasize_ ; id ++)
+  for (int id = data1.datasize_ ; id < datasize_ ; id ++)
     {
-      array[id] = (data2.getfName())[id - data1.datasize_];
-      cout<<"data2 "<<(data2.getfName())[id - data1.datasize_]<<endl;
-    }
-  data3.in_file(array);
-
-  for (int i =0; i<data3.datasize_ ;i++){
-      cout<<"data3"<<(data3.getfName())[i]<<endl;
+      fName_[id] = (data2.getfName())[id - data1.datasize_];
     }
 
-  delete [] array;
-  return data3;
+  for (int i =0; i<datasize_ ;i++){
+    }
+
 }
 
 string DATA::getName()

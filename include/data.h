@@ -11,6 +11,7 @@
       dataName_ = dataName;
       fName_ = new std::string[datasize_]();
     }
+    DATA(const DATA &other); //copy constract
     ~DATA()
     {
 	  delete [] fName_; fName_ = NULL;
@@ -19,7 +20,7 @@
     void in_file(std::string* file_name);
     void in_exp(double** a,double (*func)(double x, double* a), double x_in, double x_fi, double dx);
     int get_datasize();
-    DATA add(DATA &data1, DATA &data2);
+    void add(DATA &data1, DATA &data2);
     std::string getName();
     std::string* getfName();
   private:
