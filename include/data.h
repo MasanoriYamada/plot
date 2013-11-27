@@ -32,7 +32,7 @@
     void setName(std::string name);
     void in_file(std::string* file_name);
     void in_exp(double** a,double (*func)(double x, double* a), double x_in, double x_fi, double dx);
-    void set_scale(int x_scale, int y_scale, int err_scale);
+    void set_scale(double x_scale, double y_scale, double err_scale);
     int get_datasize();
     void add(DATA &data1, DATA &data2);
     std::string getName();

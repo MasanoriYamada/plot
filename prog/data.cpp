@@ -89,7 +89,7 @@ void DATA::add(DATA &data1, DATA &data2)
     }
 
 }
-void DATA::set_scale(int x_scale, int y_scale, int err_scale)
+void DATA::set_scale(double x_scale, double y_scale, double err_scale)
 {
   stringstream sx, sy, se;
   sx<< x_scale;
