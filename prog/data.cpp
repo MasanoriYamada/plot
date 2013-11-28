@@ -8,6 +8,7 @@
 //using namespace namespace_gnuplot;
 using namespace std;
 
+int DATA::global_ifile_;
 DATA::DATA(const DATA &other)
 {
   datasize_ = other.datasize_;
@@ -36,6 +37,8 @@ void DATA::in_exp(double** a,double (*func)(double x, double* a), double x_in, d
   y_data_ = new double[ND]();
   for (int ifile = 0 ; ifile < datasize_ ; ifile++)
     {
+      for(int i=0 ;i<5; i++) cout<<"debug"<<ifile<<" "<<i<<" "<<(a[ifile])[i]<<endl;
+
       for (int id = 0 ; id < ND ;id ++)
 	{
 	  x_data_[id] = x_in + (double)id * dx;
@@ -43,6 +46,7 @@ void DATA::in_exp(double** a,double (*func)(double x, double* a), double x_in, d
 	}
       makefile(ND,ifile);
     }
+  global_ifile_ = global_ifile_ +1;
   delete [] x_data_;
   delete [] y_data_;
 }
@@ -50,7 +54,7 @@ void DATA::makefile(int ND, int ifile)
 {
   stringstream ss;
   
-  ss << ifile <<".tmpForDrowing.dat";
+  ss << global_ifile_<<"."<<ifile <<".tmpForDrowing.dat";
   fName_[ifile] = ss.str();
   fstream ofs;
 

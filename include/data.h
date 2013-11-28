@@ -45,6 +45,7 @@
     double * y_data_;
     int datasize_;
     int datasize_in_file_;
+    static int global_ifile_;
     std::string* fName_;
     std::string dataName_;
     std::string* x_scale_;
