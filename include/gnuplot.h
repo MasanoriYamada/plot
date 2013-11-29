@@ -10,6 +10,7 @@
     {
       gp_	  = popen("gnuplot -persist","w");
       flg_w_	  = false;
+      flg_up_	  = false;
       flg_rm_	  = false;
     }
     ~GNUPLOT()
@@ -20,11 +21,13 @@
     void plot(DATA &data);
     void set(std::string param);
     void set_flg_w(bool flg_w_);
+    void set_flg_up(bool flg_up);
     void set_flg_rm(bool flg_rm_);
     private:
     void rm_file(std::string fname);
     FILE *gp_;
     bool flg_w_;
+    bool flg_up_;
     bool flg_rm_;
   };
 

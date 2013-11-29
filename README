@@ -19,7 +19,8 @@ void in_exp(double** a,double (*func)(double x, double* a), double x_in, double 
 ・GNUPLOTクラスの plot(DATA &data);を利用するとプロットできる
 
 option
-・set_flg_w(bool)でエラーを付けるか選べる
+・gnuplot.set_flg_w(bool)でエラーを付けるか選べる
+・gnuplot.set_flg_up(bool)で拡大図つきのプロットができる。
 ・set("文字列")でgnuplotにset gridなどの設定を渡せる。
 ・DATAのメンバ関数 set_scale(x_scale, y_scale, err_scale) を使うとスケール倍できる (引数は全てint　デフォルトは1)
 ・DATAクラスのメソッドdata3.add(DATA data1, DATA data2)を使うと data1とdata2を合体したdata3をつくることができる

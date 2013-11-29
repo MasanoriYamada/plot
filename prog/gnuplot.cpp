@@ -25,12 +25,29 @@ void GNUPLOT::plot(DATA &data)
       }
       if ( i != data.get_datasize() - 1) plot_string = " , " + plot_string ;
     }
-      cout<<plot_string<<endl;
-
+  cout<<"plot==>> "<<plot_string<<endl;
+  if(!flg_up_){
   fprintf(gp_, "plot %s\n", plot_string.c_str());
-  /*  if(flg_rm_){
-  for(int i = 0 ; i < data.get_datasize() ; i ++)  rm_file((data.getfName())[i] );
-  }*/
+  fprintf(gp_, "reset %s\n", plot_string.c_str());
+  }
+  else {
+    fprintf(gp_, "set multiplot\n", plot_string.c_str());
+    fprintf(gp_, "set key left top\n");
+    fprintf(gp_, "set xzeroaxis lt 7\n");
+    fprintf(gp_, "plot %s\n", plot_string.c_str());
+    fprintf(gp_, "unset grid\n"); 
+    fprintf(gp_, "set title \"enlarged view\"\n"); 
+    fprintf(gp_, "set size 0.5,0.5\n"); 
+    fprintf(gp_, "set origin 0.50,0.43\n"); 
+    fprintf(gp_, "unset key\n"); 
+    fprintf(gp_, "set yr[-150:50]\n"); 
+    fprintf(gp_, "unset xl\n"); 
+    fprintf(gp_, "unset yl\n"); 
+    fprintf(gp_, "replot\n"); 
+    fprintf(gp_, "unset multiplot\n"); 
+    fprintf(gp_, "reset\n"); 
+      
+      }
 }
 
 void GNUPLOT::set_flg_w(bool flg_w)
@@ -40,6 +57,10 @@ void GNUPLOT::set_flg_w(bool flg_w)
 void GNUPLOT::set(string param)
 {
  fprintf(gp_, "%s\n", param.c_str());
+}
+void GNUPLOT::set_flg_up(bool flg_up)
+{
+  flg_up_ = flg_up;
 }
 void GNUPLOT::set_flg_rm(bool flg_rm)
 {

@@ -56,7 +56,7 @@ int main(){
   std::string* datafile = new string[1];
 
   for (int it = T_in; it <T_fi +1; it++){
-    stringstream ss;
+    stringstream ss, so1 ;
     ss <<"/home/sinyamada/Spin0-0Bin50/Potential/jack_error/r/OmgOmgPot000014.RC16x32_B1830Kud013760Ks013710C1761.it"<<std::setw(2) << std::setfill('0')<<it;
     datafile[0] = ss.str();
 
@@ -84,9 +84,14 @@ int main(){
   DATA data_all("",data_file.get_datasize() + data_exp.get_datasize());
   data_all.add(data_exp,data_file);
   //gp1.set("set yr[-50:100]");
+  gp1.set("set grid");
   gp1.set_flg_w(true);
+  gp1.set_flg_up(true);
   gp1.plot(data_all);
+  //so1<<"set output \"/home/sinyamada/Spin0-0Bin50/fitPot/fit_vs_raw/3D/1gy3D.it"<<std::setw(2) << std::setfill('0')<<it<<".eps\"";
   //gp1.set("set term postscript enhanced color solid lw 3");
+  gp1.set(so1.str());
+  so1.clear();
   //gp1.set("set output \"/home/sinyamada/Spin0-0Bin50/fitPot/fit_vs_raw/1D/1gy1D.it09.eps\"");
   //gp1.set("set output \"/home/sinyamada/Spin0-0Bin50/fitPot/fit_vs_raw/1D/1gyy1D.it07.eps\"");
   //gp1.set("set output \"/home/sinyamada/Spin0-0Bin50/fitPot/fit_vs_raw/3D/1gy1D.it07.eps\"");
