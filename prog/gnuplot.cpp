@@ -26,13 +26,15 @@ void GNUPLOT::plot(DATA &data)
       if ( i != data.get_datasize() - 1) plot_string = " , " + plot_string ;
     }
   cout<<"plot==>> "<<plot_string<<endl;
+
   if(!flg_up_){
   fprintf(gp_, "plot %s\n", plot_string.c_str());
   fprintf(gp_, "reset %s\n", plot_string.c_str());
   }
-  else {
+  else if (flg_up_){
     fprintf(gp_, "set multiplot\n", plot_string.c_str());
-    fprintf(gp_, "set key left top\n");
+    //fprintf(gp_, "set key left top\n");
+    fprintf(gp_, "unset key\n"); 
     fprintf(gp_, "set xzeroaxis lt 7\n");
     fprintf(gp_, "plot %s\n", plot_string.c_str());
     fprintf(gp_, "unset grid\n"); 
@@ -46,8 +48,9 @@ void GNUPLOT::plot(DATA &data)
     fprintf(gp_, "replot\n"); 
     fprintf(gp_, "unset multiplot\n"); 
     fprintf(gp_, "reset\n"); 
-      
-      }
+    
+  }
+  else cout << "ERR flg_up is wrong flg_up = "<<flg_up_ <<endl;
 }
 
 void GNUPLOT::set_flg_w(bool flg_w)

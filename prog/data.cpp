@@ -37,7 +37,7 @@ void DATA::in_exp(double** a,double (*func)(double x, double* a), double x_in, d
   y_data_ = new double[ND]();
   for (int ifile = 0 ; ifile < datasize_ ; ifile++)
     {
-      for(int i=0 ;i<5; i++) cout<<"debug"<<ifile<<" "<<i<<" "<<(a[ifile])[i]<<endl;
+      //      for(int i=0 ;i<5; i++) cout<<"debug"<<ifile<<" "<<i<<" "<<(a[ifile])[i]<<endl;
 
       for (int id = 0 ; id < ND ;id ++)
 	{
